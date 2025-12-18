@@ -1,0 +1,13 @@
+  - kind: issue
+    selector:
+      query: 'true'
+      jql: (statusCategory != Done) OR (created >= -1w) OR (updated >= -1w)
+    port:
+      itemsToParse: .fields.components
+      entity:
+        mappings:
+          identifier: .key + .item.id
+          blueprint: '"service"'
+          properties: {}
+          relations:
+            repository: .item.name
