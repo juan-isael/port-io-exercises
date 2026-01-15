@@ -6,8 +6,13 @@
       itemsToParse: .fields.components
       entity:
         mappings:
-          identifier: .key + .item.id
-          blueprint: '"service"'
-          properties: {}
+          identifier: .key
+          title: .fields.summary
+          blueprint: '"jiraIssue"'
           relations:
-            repository: .item.name
+            service:
+              combinator: '"and"'
+              rules:
+                - property: '"repo_id"'
+                  operator: '"contains"'
+                  value: .item.name
