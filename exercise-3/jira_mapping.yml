@@ -29,7 +29,6 @@ resources:
       query: 'true'
       jql: (statusCategory != Done) OR (created >= -1w) OR (updated >= -1w)
     port:
-      itemsToParse: .fields.components
       entity:
         mappings:
           identifier: .key
@@ -74,8 +73,8 @@ resources:
               combinator: '"and"'
               rules:
                 - property: '"repo_id"'
-                  operator: '"contains"'
-                  value: .item.name
+                  operator: '"in"'
+                  value: .fields.components | map(.name)
 deleteDependentEntities: true
 createMissingRelatedEntities: true
 enableMergeEntity: true
